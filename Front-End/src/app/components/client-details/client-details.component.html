@@ -22,8 +22,34 @@
     </div>
 
     <div class="cold-md-8 col-sm-6">
-     @Todo  Balance
+      <h3 class="pull-right">
+        Balance 
+        <span
+          [class.text-danger]="hasBalance"
+          [class.text-success]="!hasBalance"
+        >
+        {{client.balance |currency:"USD":"symbol"}}
+        </span>
+        <small>
+          <a (click)="showBalanceUpdateInput=!showBalanceUpdateInput">
+
+            <i class="fa fa-pencil"></i>
+          </a>
+        </small>
+      </h3>
+      <div class="clearfix">
+        <form *ngIf="showBalanceUpdateInput">
+          <div class="input-group">
+            <input type="text" name="balance" class="form-control" [(ngModel)]= "client.balance">
+            <span class="input-group-btn">
+              <button  class="btn btn-primary" (click)="showBalanceUpdateInput=!showBalanceUpdateInput" (click)="updateBalance()">Update</button>
+            </span>
+
+          </div>
+
+        </form>
       </div>
+    </div>
 
   </div>
   <hr>

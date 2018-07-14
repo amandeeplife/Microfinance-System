@@ -36,18 +36,14 @@ export class AddClientComponent implements OnInit {
     }
 
     if(!valid) {
-      // Show error
-      this.flashMessage.show('Please fill out the form correctly', {
+       this.flashMessage.show('Please fill out the form correctly', {
         cssClass: 'alert-danger', timeout: 4000
       });
     } else {
-      // Add new client
-      this.clientService.newClient(value);
-      // Show message
-      this.flashMessage.show('New client added', {
+       this.clientService.newClient(value);
+       this.flashMessage.show('New client added', {
         cssClass: 'alert-success', timeout: 4000
-      });
-      // Redirect to dash
+      }); 
       this.router.navigate(['/']);
     }
   }

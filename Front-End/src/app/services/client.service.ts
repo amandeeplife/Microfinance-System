@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
+import {ClientsComponent} from '../components/clients/clients.component'
+import { Client } from '../model/Client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
-  clients;
-    client;
+
+    clients:Client[];
+    client:Client;
     id:number=0;
+    clientsComponent:ClientsComponent;
   constructor() {
 
     this.clients = []
-
+    
    }
   newClient(val){
     val.id=++this.id;
@@ -29,5 +33,12 @@ export class ClientService {
     }
 
     return this.client
+  }
+  updateClient(currentClient){
+    this.client = this.getClient(currentClient.id);
+      this.clientsComponent.getTotalOwed()
+    this.client = currentClient;
+
+
   }
 }
