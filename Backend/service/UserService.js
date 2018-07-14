@@ -17,12 +17,13 @@ class UserService{
         console.log("USer Saved Successfully");
         console.log("Array: "+this.users);
         for (let i=0; i<this.users.length; i++){
-            console.log("the name is "+this.users[i].name)
+            //console.log("the name is "+this.users[i].name)
+            console.log("am adding new user>>>>>"+this.users[i].name)
         }
     }
 
     getUsers(){
-        console.log("insdie gradeservice"+this.users)
+        console.log("insdie userservice"+this.users)
         
                 return this.users;                    
     }
@@ -30,15 +31,36 @@ class UserService{
     getUser(id){
         console.log("insdie getoneUSer"+this.users)
         for (var i = 0; i < this.users.length; i++) {
-            if(this.users[i].id == id){
+            if(this.users[i].accountId == id){
+                console.log("i am the user"+this.users[i].name)
                return this.users[i];               
             }
         }
     }
 
+    deleteUser(id){
 
+        for (var i = 0; i < this.users.length; i++) {
+            if(this.users[i].accountId == id){
+              this.users.splice(i,1);               
+            }
+        }
+    }
+    updateById(user){
+        for (var i = 0; i < this.users.length; i ++) {
+            if(this.users[i].accountId == user.id){
+              this.users[i] = user;               
+            }
+
+        }
     }  
-       
+    updateByName(user){
+        for (var i = 0; i < this.users.length; i ++) {
+            if(this.users[i].name == user.name){
+              this.users[i] = user;               
+            }
+
+        }}}
 //         MongoClient.connect(url).then(function(db)) {
 //             console.log(db);
 
