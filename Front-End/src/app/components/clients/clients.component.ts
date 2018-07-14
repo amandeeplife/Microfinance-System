@@ -16,7 +16,7 @@ export class ClientsComponent implements OnInit {
     this.getTotalOwed();
   }
   getTotalOwed(){
-    this.totalOwed=1
+    this.totalOwed=0
      for(let i=0; i<this.clients.length; i++){
       this.totalOwed+=this.clients[i].balance
     }
