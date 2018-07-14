@@ -29,10 +29,17 @@ export class ClientDetailsComponent implements OnInit {
   }
   console.log(this.client)
   }
-  updateBalace(){
+  updateBalance(){
 this.clientService.updateClient(this.client) 
 this.flashMessage.show("Balance updated",{
   cssClass:'alert-success',timeout:3000
 });
+   }
+
+   onDeleteClick(){
+     if(confirm('Are you sure?')){
+      this.clientService.deletClient(this.client);
+     }
+     this.router.navigate(['/'])
    }
 }
