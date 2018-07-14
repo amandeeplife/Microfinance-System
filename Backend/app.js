@@ -13,9 +13,9 @@ var port = 9898
 app.use(express.json())
 
 app.use(express.urlencoded({extended:true}))
-app.use(bodyParser.json());
-app.use('/', route)
 
+app.use('/', route)
+app.use(bodyParser.json());
 app.listen(port,()=>{
     console.log("server is running", port);
 

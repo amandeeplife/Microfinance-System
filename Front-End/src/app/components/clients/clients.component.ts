@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../services/client.service';
+import { Client } from '../../model/Client';
 
 @Component({
   selector: 'app-clients',
@@ -7,7 +8,7 @@ import { ClientService } from '../../services/client.service';
   styleUrls: ['./clients.component.css']
 })
 export class ClientsComponent implements OnInit {
-  clients ;
+  clients:Client[] ;
   totalOwed :number
   constructor(private clientService: ClientService) { }
 
@@ -16,9 +17,9 @@ export class ClientsComponent implements OnInit {
     this.getTotalOwed();
   }
   getTotalOwed(){
-    this.totalOwed=1
+    this.totalOwed=0
      for(let i=0; i<this.clients.length; i++){
-      this.totalOwed+=this.clients[i].balance
+      this.totalOwed+=parseFloat(this.clients[i].balance.toString())
     }
   }
 
