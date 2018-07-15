@@ -38,9 +38,7 @@ export class ClientService {
     this.client = this.getClient(currentClient.id);
       this.clientsComponent.getTotalOwed()
     this.client = currentClient;
+
+
   }
-  deletClient(curretClinetedTobDeleted){
-   
-    
-    }
 }
