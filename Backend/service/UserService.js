@@ -1,6 +1,22 @@
 const user= require('../Model/user')
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+var mongoose = require("mongoose")
+mongoose.connect("mongodb://localhost:27017/MicroFinance")
+
+
+
+var Schema= mongoose.Schema;
+// define the lay out
+var userDataSchema= new Schema({
+    accountId: String,
+    name: String,
+    age: String,
+    salary: String,
+    email: String}, 
+    
+    {collection:"Users"});
+
+var UserData= mongoose.model('UserData', userDataSchema);
+// trying mongoos
 
 var User  = new user()
 //users=[{"name": "Behailu"}]

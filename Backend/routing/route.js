@@ -3,7 +3,46 @@ const User= require('../Model/user')
 const UserService= require('../service/UserService')
 const router= express.Router();
 const jwt= require('jsonwebtoken');
+// var mongoose = require("mongoose")
+// mongoose.connect("mongodb://localhost:27017/MicroFinance")
 
+
+
+// var Schema= mongoose.Schema;
+// // define the lay out
+// var userDataSchema= new Schema({
+//     accountId: String,
+//     name: String,
+//     age: String,
+//     salary: String,
+//     email: String}, 
+    
+//     {collection:"Users"});
+
+// var UserData= mongoose.model('UserData', userDataSchema);
+// // trying mongoos
+// router.get('/getfromdb', function(req,res,next){
+//     UserData.find().then(function(doc){
+//         console.log("inside mongse get function")
+//         res.send(doc)
+//     })
+// })
+
+// router.post('/postToDb', function(req,res,next){
+//     var myusers={
+
+    // accountId:req.body.id,
+    // name: req.body.name,
+    // age: req.body.age,
+    // salary: req.body.salary,
+    // email: req.body.email
+    // };
+
+//     var data= new UserData(myusers)
+//     data.save();
+//     console.log("inside mongse post function")
+//     res.end()
+// })
 
  userService= new UserService();
 
