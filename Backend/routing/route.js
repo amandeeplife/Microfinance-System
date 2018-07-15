@@ -20,7 +20,7 @@ const jwt= require('jsonwebtoken');
 //     {collection:"Users"});
 
 // var UserData= mongoose.model('UserData', userDataSchema);
-// // trying mongoos
+// trying mongoos
 // router.get('/getfromdb', function(req,res,next){
 //     UserData.find().then(function(doc){
 //         console.log("inside mongse get function")
@@ -31,12 +31,12 @@ const jwt= require('jsonwebtoken');
 // router.post('/postToDb', function(req,res,next){
 //     var myusers={
 
-    // accountId:req.body.id,
-    // name: req.body.name,
-    // age: req.body.age,
-    // salary: req.body.salary,
-    // email: req.body.email
-    // };
+//     accountId:req.body.id,
+//     name: req.body.name,
+//     age: req.body.age,
+//     salary: req.body.salary,
+//     email: req.body.email
+//     };
 
 //     var data= new UserData(myusers)
 //     data.save();
@@ -65,18 +65,12 @@ router.post('/addUsers', verifyToken, function(req,res)
     })
     
 })
-router.get('/users', function(req,res){
-   
-    var users= userService.getUsers()
-    console.log("the result is "+users)
-    res.send(users)
+router.get('/users', function(req,res){   
+    userService.getUsers().then(data=>{res.json(data)})
 })
 
 router.get('/:id',function(req,res){
-    user=  userService.getUser(req.params.id)
-    console.log("oneuser is"+user)
-     res.send(user)
-     
+    userService.getUser(req.params.id).then(data=>{res.json(data)})
  })
 
  router.delete('/:id',function(req,res){

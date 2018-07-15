@@ -16,6 +16,7 @@ var userDataSchema= new Schema({
     {collection:"Users"});
 
 var UserData= mongoose.model('UserData', userDataSchema);
+
 // trying mongoos
 
 var User  = new user()
@@ -26,32 +27,46 @@ class UserService{
       this.users=[{"name": "Behailu"}]
     }
    
-    addUser(accountId, name, age, salary, Email){
-        console.log("inside adduser")
-       var myuser= new user (accountId, name, age, salary, Email)
-        this.users.push(myuser);
-        console.log("USer Saved Successfully");
-        console.log("Array: "+this.users);
-        for (let i=0; i<this.users.length; i++){
-            //console.log("the name is "+this.users[i].name)
-            console.log("am adding new user>>>>>"+this.users[i].name)
-        }
+    addUser(accountId, name, age, salary, email){
+       var myuser={accountId:accountId,
+        name: name, 
+        age: age, 
+        salary: salary, 
+        email: email }
+        var data= new UserData(myuser)
+        data.save()
+        
+    //     console.log("inside adduser")
+    //   // var myuser= new user (accountId, name, age, salary, Email)
+    //     this.users.push(myuser);
+    //     console.log("USer Saved Successfully");
+    //     console.log("Array: "+this.users);
+    //     for (let i=0; i<this.users.length; i++){
+    //         //console.log("the name is "+this.users[i].name)
+    //         console.log("am adding new user>>>>>"+this.users[i].name)
+       // }
     }
 
     getUsers(){
-        console.log("insdie userservice"+this.users)
         
-                return this.users;                    
+       
+       return  UserData.find()
+      
+ 
+       
+              //  return this.users;                    
     }
 
     getUser(id){
-        console.log("insdie getoneUSer"+this.users)
-        for (var i = 0; i < this.users.length; i++) {
-            if(this.users[i].accountId == id){
-                console.log("i am the user"+this.users[i].name)
-               return this.users[i];               
-            }
-        }
+    
+       return UserData.find({accountId:id})
+        // console.log("insdie getoneUSer"+this.users)
+        // for (var i = 0; i < this.users.length; i++) {
+        //     if(this.users[i].accountId == id){
+        //         console.log("i am the user"+this.users[i].name)
+        //        return this.users[i];               
+          //  }
+        //}
     }
 
     deleteUser(id){
