@@ -15,4 +15,8 @@ export class AuthService {
     else return false
   
   }
+  //getAuth()
+  logOUt(){
+    // this.logOUt.....
+  }
 }
