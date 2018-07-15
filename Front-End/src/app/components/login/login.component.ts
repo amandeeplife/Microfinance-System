@@ -19,6 +19,10 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // this.authService.getAuth()
+    // if(true){
+    //   this.router.navigate(['/'])
+    // }
   }
   onSubmit(){
    if( this.authService.login(this.email,this.password)){
