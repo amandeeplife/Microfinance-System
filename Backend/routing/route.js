@@ -20,8 +20,6 @@ router.post('/addUsers', verifyToken, function(req,res)
             res.json({
              message: 'postCreated...',
               authData
-              
-  
             })
             res.end();
         }
@@ -55,18 +53,18 @@ router.put('/userEdit/:name', function(req, res){
 
 
 
-router.post('/login', (req,res)=>{
-    const loguser= {
-        id: 1,
-        username: "brad",
-        email: "getbirte@yahoo.com"
-    }
-    jwt.sign({loguser}, 'secretkey',(err,token)=>{
-        res.json({
-            token
-        })
-    })
-})
+// router.post('/login', (req,res)=>{
+//     const loguser= {
+//         id: 1,
+//         username: "brad",
+//         email: "getbirte@yahoo.com"
+//     }
+//     jwt.sign({loguser}, 'secretkey',(err,token)=>{
+//         res.json({
+//             token
+//         })
+//     })
+// })
 
 function verifyToken(req,res,next){
    
@@ -121,6 +119,42 @@ router.post('/signup', (req,res,next)=>{
        
    
 })
+
+router.post('/login',(req,res,next)=>{
+    UserLogin.find({email:req.body.email}).exec().then(user=>{
+            console.log("am here comparing")
+            console.log(user[0].email)
+          
+    if(user[0].email == req.body.email && user[0].password ==req.body.password){
+
+        
+        return res.status(200).json({
+            messagge: "Authentication successfull"
+        });
+        }
+        res.status(401).json({
+            message:'auth failed'
+        })
+// bcrypt.compare(req.body.password, user[0].password,(err, result)=>{
+//    if(err){
+//        return res.status(401).json({
+//            message: 'Auth failed'
+//        });
+//    } 
+
+//    if(result){
+//        return res.status(200).json({
+//            messagge: "Authentication successfull"
+//        });
+//    }
+//    res.status(401).json({
+//        message:'auth failed'
+//    })
+// })
+
+    })
+})
+
 
 module.exports=router
 
