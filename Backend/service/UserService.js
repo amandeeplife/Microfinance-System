@@ -1,30 +1,21 @@
 const user= require('../Model/user')
 var mongoose = require("mongoose")
+const UserData= require('../service/dbService')
 mongoose.connect("mongodb://localhost:27017/MicroFinance")
-var Schema= mongoose.Schema;
-var userDataSchema= new Schema({
-    accountId: String,
-    name: String,
-    age: String,
-    salary: String,
-    email: String}, 
-    
-    {collection:"Users"});
-
-var UserData= mongoose.model('UserData', userDataSchema);
+var accountId=23423432423;
 var User  = new user()
-
 class UserService{
 
     constructor(){
       //this.users=[{"name": "Behailu"}]
     }
-    addUser(accountId, name, age, salary, email){
-       var myuser={accountId:accountId,
+    addUser(name, age, salary, email,password){
+       var myuser={accountId: this.accountId++,
         name: name, 
         age: age, 
         salary: salary, 
-        email: email }
+        email: email,
+        password:password}
         var data= new UserData(myuser)
         data.save()
     }
@@ -41,11 +32,7 @@ class UserService{
     deleteUser(id){
 
         return UserData.findOneAndRemove({accountId:id})
-        // for (var i = 0; i < this.users.length; i++) {
-        //     if(this.users[i].accountId == id){
-        //       this.users.splice(i,1);               
-        //     }
-       // }
+       
     }
     updateById(user){
         for (var i = 0; i < this.users.length; i ++) {

@@ -1,15 +1,15 @@
 
 class User{
 
-    constructor(accountId, name, age, salary, Email){
+    constructor(accountId,name, email, password, age, salary){
 
     var users={};
-
     this.accountId= accountId;
     this.name=name;
     this.age=age;
     this.salary=salary;
-    this.Email=Email;
+    this.email=email;
+    this.password=password
 
 }
 }
