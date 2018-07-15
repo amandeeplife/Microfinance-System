@@ -21,7 +21,7 @@ router.post('/addUsers', verifyToken, function(req,res)
               
   
             })
-            res.end()
+            res.end();
         }
     })
     
