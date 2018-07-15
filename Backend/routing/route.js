@@ -1,8 +1,11 @@
 const express= require('express')
 const User= require('../Model/user')
+const UserLogin= require('../Model/UserLogin')
 const UserService= require('../service/UserService')
 const router= express.Router();
 const jwt= require('jsonwebtoken');
+const mongoose= require("mongoose")
+//const bcrypt= require('bycrypt');
 
  userService= new UserService();
 
@@ -78,6 +81,46 @@ if(typeof bearerHeader!=='undefined'){
     res.sendStatus(403);
 }
 }
+
+router.post('/signup', (req,res,next)=>{
+    console.log("am here singingup")
+   UserLogin.find({email:req.body.email}).exec()
+   .then(user=>{
+       if(user.length>=1){
+           return res.status(409).json({
+               message:"mail exists"
+           })
+       } else{
+         /* bcrypt.hash(req.body.password, 10, (err,hash)=>{
+              if(err){
+                  return res.status(500).json({
+                      error:err
+                  })
+              } */
+              
+                  const user= new UserLogin({
+                      email:req.body.email,
+                      password:req.body.password
+                  })
+                  user.save().then(result=>{
+                      console.log(result)
+                      res.status(201).json({
+                          message:"user Created"
+                        
+                      })
+                      res.end()
+                  }).catch(err=>{
+                   console.log(err);
+                   res.status(500).json({
+                       error:err
+                   })
+                   res.end()
+                  })
+              }
+           })
+       
+   
+})
 
 module.exports=router
 
