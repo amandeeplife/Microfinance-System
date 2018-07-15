@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   }
   onSubmit(){
    if( this.authService.login(this.email,this.password)){
+     this.authService.authUser=this.email;
      this.router.navigate(['/'])
    }
    else{
