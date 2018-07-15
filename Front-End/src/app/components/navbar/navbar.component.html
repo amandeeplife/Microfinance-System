@@ -13,13 +13,25 @@
       </li> 
     </ul>
    <ul class ="navbar-nav mr-auto">
-     <li class = "nav-item">
+     <li  *ngIf="!isLoggedIn"  class = "nav-item">
        <a routerLink="/register" class="nav-link">Register</a>
      </li>
-   </ul>
-    <div class="nav-item">
+   <li *ngIf="!isLoggedIn"  class="nav-item">
       <a routerLink="/login" class="nav-link">Login</a>
-    </div>
+      </li>
+   
+
+      <li *ngIf="isLoggedIn"  class="nav-item">
+          <a href="#" class="nav-link">{{loggedInUser}}</a>
+          </li>
+          </ul>
+          <li *ngIf="!isLoggedIn"  class="nav-item">
+              <a routerLink="/settings" class="nav-link">Settings</a>
+</li>
+         <li *ngIf="isLoggedIn"  class="nav-item">
+                  <a (click)="onLogOutClick()" class="nav-link">Logout</a>
+                  </li>
+    
   </div>
   </div>
 </div>
