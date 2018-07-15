@@ -1,11 +1,7 @@
 const user= require('../Model/user')
 var mongoose = require("mongoose")
 mongoose.connect("mongodb://localhost:27017/MicroFinance")
-
-
-
 var Schema= mongoose.Schema;
-// define the lay out
 var userDataSchema= new Schema({
     accountId: String,
     name: String,
@@ -16,17 +12,13 @@ var userDataSchema= new Schema({
     {collection:"Users"});
 
 var UserData= mongoose.model('UserData', userDataSchema);
-
-// trying mongoos
-
 var User  = new user()
-//users=[{"name": "Behailu"}]
+
 class UserService{
 
     constructor(){
-      this.users=[{"name": "Behailu"}]
+      //this.users=[{"name": "Behailu"}]
     }
-   
     addUser(accountId, name, age, salary, email){
        var myuser={accountId:accountId,
         name: name, 
@@ -35,47 +27,25 @@ class UserService{
         email: email }
         var data= new UserData(myuser)
         data.save()
-        
-    //     console.log("inside adduser")
-    //   // var myuser= new user (accountId, name, age, salary, Email)
-    //     this.users.push(myuser);
-    //     console.log("USer Saved Successfully");
-    //     console.log("Array: "+this.users);
-    //     for (let i=0; i<this.users.length; i++){
-    //         //console.log("the name is "+this.users[i].name)
-    //         console.log("am adding new user>>>>>"+this.users[i].name)
-       // }
     }
 
-    getUsers(){
-        
-       
-       return  UserData.find()
-      
- 
-       
-              //  return this.users;                    
+    getUsers(){ 
+       return  UserData.find()                        
     }
 
     getUser(id){
     
        return UserData.find({accountId:id})
-        // console.log("insdie getoneUSer"+this.users)
-        // for (var i = 0; i < this.users.length; i++) {
-        //     if(this.users[i].accountId == id){
-        //         console.log("i am the user"+this.users[i].name)
-        //        return this.users[i];               
-          //  }
-        //}
-    }
+       }
 
     deleteUser(id){
 
-        for (var i = 0; i < this.users.length; i++) {
-            if(this.users[i].accountId == id){
-              this.users.splice(i,1);               
-            }
-        }
+        return UserData.findOneAndRemove({accountId:id})
+        // for (var i = 0; i < this.users.length; i++) {
+        //     if(this.users[i].accountId == id){
+        //       this.users.splice(i,1);               
+        //     }
+       // }
     }
     updateById(user){
         for (var i = 0; i < this.users.length; i ++) {
@@ -86,56 +56,13 @@ class UserService{
         }
     }  
     updateByName(user){
-        for (var i = 0; i < this.users.length; i ++) {
+        for (var i = 0; i < this.users.length; i++) {
             if(this.users[i].name == user.name){
               this.users[i] = user;               
             }
 
-        }}}
-//         MongoClient.connect(url).then(function(db)) {
-//             console.log(db);
+        }}}    
 
-//             db.collection("Users").find().toArray(function(err, result) {
-//                                if (err) throw err;
-//                                console.log(result);
-//                                //myresult=result
-                                
-//                                db.close();
-//                              });
-//         });
-//     }
-
-// //  getUsers()
-// {      
-//        return MongoClient.connect(url).then(function(db)) {
-//            console.log
-//             if (err) throw err;
-//             var dbo = db.db("MicroFinance");
-//            // var query = { address: "Park Lane 38" };
-//             dbo.collection("Users").find().toArray(function(err, result) {
-//               if (err) throw err;
-//               console.log(result);
-//               //myresult=result
-                
-//               db.close();
-//             });
-//           });
-
-//           //return myresult
-//         }
-        
-//         var db= collection.db("MicroFinance")
-//         users=db.collection("Users").find()
-//         for(var i=0; i<this.users.length; i++){
-//             return this.users
-   
-        
-//         }
-        
-//     }
-// }
-    
-       
 module.exports= UserService
 
 
