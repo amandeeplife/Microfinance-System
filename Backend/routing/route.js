@@ -5,6 +5,7 @@ const UserService= require('../service/UserService')
 const router= express.Router();
 const jwt= require('jsonwebtoken');
 const mongoose= require("mongoose")
+const stripe= require("stripe")
 
  userService= new UserService();
 
@@ -124,11 +125,11 @@ router.post('/login',(req,res,next)=>{
 router.patch('/:id', (req, res, next)=>{
     console.log("am patching")
     const id= req.params.accountId
-    const updateops={};
-    for(const opps of req.body){
-        updateops[opps.propName]=opps.value;
-    }
-    UserData.update({accountId:id},{$set:updateops}).exec().then(result=>{
+    // const updateops={};
+    // for(const opps of req.body){
+    //     updateops[opps.propName]=opps.value;
+    //}
+    UserData.update({accountId:id},{$set:{firstname:req.body.firstName,}}).exec().then(result=>{
         console.log("update is" +req.body.firstName);
         res.status(200).json(result)
     
@@ -140,8 +141,22 @@ res.status(500).json({
     
 })
 })
-    
+router.post('/charge', function(req, res){
+        var token2= req.body.stripeToken;
+        var chargeAmount= req.body.chargeAmount;
+        var charge= stripe.charges.create({
+            amount:chargeAmount,
+            currency: "USD",
+          source:token2}, function(err, charge){
+         if( err & err.type==="stripeCardError"){
+            console.log("ur card was decline")
+                  
+          }   
+    })
 
+    console.log("payment succefull")
+    res.status(200).json(charge)
+})
 
 module.exports=router
 
