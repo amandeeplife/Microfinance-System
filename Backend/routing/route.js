@@ -9,8 +9,7 @@ const mongoose= require("mongoose")
  userService= new UserService();
 
 router.post('/addUsers', verifyToken, function(req,res)
-{
-    jwt.verify(req.token, 'secretkey', (err, authData)=>{
+{ jwt.verify(req.token, 'secretkey', (err, authData)=>{
         if(err){
             res.sendStatus(403)
         } else{
@@ -20,10 +19,8 @@ router.post('/addUsers', verifyToken, function(req,res)
              message: 'postCreated...',
               authData
             })
-            res.end();
-        }
+            res.end();}
     })
-    
 })
 router.get('/users', verifyToken, function(req,res){ 
     jwt.verify(req.token,'secretkey', (err, authData)=>{
@@ -42,39 +39,35 @@ router.get('/:id',verifyToken, function(req,res){
             res.sendStatus(403)
         } 
         else{
-            userService.getUser(req.params.id).then(data=>{res.json(data)})
-        }
+            userService.getUser(req.params.id).then(data=>{res.json(data)})  }
     });
    
  });
-
  router.delete('/:id',function(req,res){
-     jwt.verify(req.token),'secretkey', (err, authData)=>{
-        if(err){
+     console.log("am in delete")
+    /*jwt.verify(req.token),'secretkey', (err, authData)=>{
+     if(err){
             res.sendStatus(403)
+            console.log("deleting not working")
         } 
-        else{
+        else{*/
             userService.deleteUser(req.params.id)
-            res.end()
-        }  
-     }
-    
+            console.log("deleting not working")
+            //res.end()
+            
+        //}  
+     //}  
 })
-
 router.put('/:id', function(req, res){
     let user  = new User(req.body.accountId, req.body.name, req.body.age, req.body.salary, req.body.email)
     userService.updateById(user)
     res.end()
 })
-
 router.put('/userEdit/:name', function(req, res){
     userService.updateByName(req.params.name)
     res.end()
 })
-
-
-function verifyToken(req,res,next){
-   
+function verifyToken(req,res,next){  
 var bearerHeader = req.headers["authorization"];
 if(typeof bearerHeader!=='undefined'){
     const bearer= bearerHeader.split(" ");
@@ -86,7 +79,6 @@ if(typeof bearerHeader!=='undefined'){
     res.sendStatus(403);
 }
 }
-
 router.post('/signup', (req,res,next)=>{
     console.log("am here singingup")
    UserData.find({email:req.body.email}).exec()
@@ -96,35 +88,25 @@ router.post('/signup', (req,res,next)=>{
                message:"mail exists"
            })
        } else{
-       
-            userService.addUser(req.body.name, req.body.age, req.body.salary, req.body.email,req.body.password);
-                  
+            userService.addUser(req.body.accountId,req.body.name, req.body.age, req.body.salary, req.body.email,req.body.password);    
             console.log("added user is"+req.body.name)
             res.json({
              message: 'postCreated...',
               
             })
             res.end();
-            
-            
               }
-           })
-       
-   
+           })      
 })
-
 router.post('/login',(req,res,next)=>{
     UserData.find({email:req.body.email}).exec().then(user=>{
             console.log("am here comparing")
-            console.log(user[0].email)
-          
+            console.log(user[0].email)   
     if(user[0].email == req.body.email && user[0].password ==req.body.password){
-
        token= jwt.sign({email:user[0],
             password:user[0]}, 'secretkey', {
                 expiresIn:"1h"
             })
-        
         return res.status(200).json({
             messagge: "Authentication successfull",
             token:token
@@ -133,8 +115,6 @@ router.post('/login',(req,res,next)=>{
         res.status(401).json({
             message:'auth failed'
         })
-
-
     })
 })
 

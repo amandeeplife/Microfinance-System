@@ -1,4 +1,5 @@
 
+
 var mongoose = require("mongoose")
 
 mongoose.connect("mongodb://localhost:27017/MicroFinance")
@@ -13,6 +14,7 @@ var userDataSchema= new Schema({
     password: {
         type:String,
         required:true},
+    accountId:String,
     name: String,
     AccountId: String,
     age: String,

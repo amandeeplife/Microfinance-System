@@ -2,15 +2,15 @@ const user= require('../Model/user')
 var mongoose = require("mongoose")
 const UserData= require('../service/dbService')
 mongoose.connect("mongodb://localhost:27017/MicroFinance")
-var accountId=23423432423;
+
 var User  = new user()
 class UserService{
 
     constructor(){
       //this.users=[{"name": "Behailu"}]
     }
-    addUser(name, age, salary, email,password){
-       var myuser={accountId: this.accountId++,
+    addUser(accountId, name, age, salary, email,password){
+       var myuser={accountId:accountId,
         name: name, 
         age: age, 
         salary: salary, 
@@ -31,8 +31,8 @@ class UserService{
 
     deleteUser(id){
 
-        return UserData.findOneAndRemove({accountId:id})
-       
+        return UserData.deleteOne({accountId:id}).catch(function(err){})
+
     }
     updateById(user){
         for (var i = 0; i < this.users.length; i ++) {
