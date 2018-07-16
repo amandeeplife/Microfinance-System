@@ -11,16 +11,23 @@ import {SettingsComponent} from './components/settings/settings.component';
 import {NotfoundComponent} from './components/notfound/notfound.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {ClientDetailsComponent} from './components/client-details/client-details.component';
+import {ClientLoginComponent} from './clientside/client-login/client-login.component'
+import {CurrentUserDashboardComponent} from './clientside/currentuserdashboard/currentuserdashboard.component'
 import {AuthGuard} from './guard/auth.guard'
 const routes: Routes = [
   {path:'', component:DashboardComponent, canActivate:[AuthGuard]},
   {path:'login', component:LoginComponent},
+  // {path:'memberlogin', component:ClientLoginComponent},
+  {path:'clientside/dashboard', component:CurrentUserDashboardComponent},
+  {path:'', component:ClientLoginComponent},
 
-  {path:'register', component:RegisterComponent},
-  {path:'client/add', component:AddClientComponent,canActivate:[AuthGuard]},
+
+
+  // {path:'register', component:RegisterComponent},
+  {path:'register', component:AddClientComponent },
   {path:'settings', component:SettingsComponent,canActivate:[AuthGuard]},
 
-  {path:'client/edit/:id', component:EditClientComponent,canActivate:[AuthGuard]},
+  {path:'client/edit/:id', component:EditClientComponent},//,canActivate:[AuthGuard]
   {path:'client/:id', component:ClientDetailsComponent,canActivate:[AuthGuard]},
   {path:'**', component:NotfoundComponent},
 

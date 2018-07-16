@@ -11,11 +11,16 @@ import { Router } from '@angular/router';
 })
 export class AddClientComponent implements OnInit {
   client = {
+    id: '',
     firstName: '',
     lastName: '',
+    age:'',
     email: '',
+    password:'',
     phone: '',
-    balance: 0
+    debit:'',
+    salary:'',
+    status:"pending"
   }
 
   disableBalanceOnAdd: boolean = false;
@@ -32,7 +37,7 @@ export class AddClientComponent implements OnInit {
 
   onSubmit({value, valid}: {value, valid: boolean}) {
     if(this.disableBalanceOnAdd) {
-      value.balance = 0;
+      value.debit = 0;
     }
 
     if(!valid) {
@@ -44,7 +49,7 @@ export class AddClientComponent implements OnInit {
        this.flashMessage.show('New client added', {
         cssClass: 'alert-success', timeout: 4000
       }); 
-      this.router.navigate(['/']);
+      this.router.navigate(['login']);
     }
   }
 

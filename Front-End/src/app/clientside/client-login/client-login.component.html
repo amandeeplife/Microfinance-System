@@ -3,9 +3,9 @@
       <div class="card">
         <div class="card-body">
           <h1 class="text-center pb-4 pt-3">
-            <span class="text-primary"><i class="fa fa-lock"></i> Wakanda MicroFinance</span>  
+            <span class="text-primary"><i class="fa fa-lock"></i> Member Login</span> Login
           </h1>
-          <form (submit)="onSubmit()">
+          <form (submit)="onSubmit() "  >
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" name="email" [(ngModel)]="email" class="form-control" required>
@@ -16,9 +16,8 @@
             </div>
             <input type="submit" value="Login" class="btn btn-primary btn-block">
           </form>
-          <br>
-          <button  (click)="register()" class="btn  btn-block">Register</button>
         </div>
       </div>
     </div>
   </div>
+ 

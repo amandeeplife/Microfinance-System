@@ -16,6 +16,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { CurrentUserDashboardComponent } from './clientside/currentuserdashboard/currentuserdashboard.component';
+import { CurrentUserDetailComponent } from './clientside/currentuserdetail/currentuserdetail.component';
+import { ClientLoginComponent } from './clientside/client-login/client-login.component';
+import { Module as StripeModule } from "stripe-angular";
+import { LandingComponent } from './components/landing/landing.component'
 
 @NgModule({
   declarations: [
@@ -30,13 +35,18 @@ import { AppRoutingModule } from './/app-routing.module';
     LoginComponent,
     RegisterComponent,
     SettingsComponent,
-     NotfoundComponent
+     NotfoundComponent,
+     CurrentUserDashboardComponent,
+     CurrentUserDetailComponent,
+     ClientLoginComponent,
+     LandingComponent
   ],
   imports: [
     FlashMessagesModule.forRoot(),
     FormsModule,
     BrowserModule,
-     AppRoutingModule
+     AppRoutingModule,
+     StripeModule 
   ],
   providers: [ ],
    bootstrap: [AppComponent]

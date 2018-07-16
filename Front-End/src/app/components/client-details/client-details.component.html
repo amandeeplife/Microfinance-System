@@ -1,15 +1,20 @@
 <div class="row">
-  <div class="col-md-6">
+  <div *ngIf="currentUserisAdmin"class="col-md-6">
     <a routerLink="/" class="btn btn-link">
     <i class="fa fa-arrow-circle-o-left"></i>Back To Dashboard
     </a>
   </div>
   <div class="col-md-6">
 <div class="btn-group pull-right">
+  <div *ngIf="currentUserisAdmin">
+      <button (click)="onAcceptClick()" class="btn btn-primary">Accept  </button>
+ 
+  <!-- </div>
   <a routerLink="/client/edit/{{id}}" class="btn btn-dark">
      Edit 
-  </a>
-  <button (click)="onDeleteClick()" class="btn btn-danger">Delete</button>
+  </a> -->
+
+  <button (click)="onDeleteClick()" class="btn btn-danger">Delete</button></div>
 </div>
   </div>
 </div>
@@ -20,15 +25,15 @@
     <div class="cold-md-8 col-sm-6">
       <h4>Client ID:{{client.id}}</h4>
     </div>
-
+    
     <div class="cold-md-8 col-sm-6">
       <h3 class="pull-right">
-        Balance 
+        Debit 
         <span
           [class.text-danger]="hasBalance"
           [class.text-success]="!hasBalance"
         >
-        {{client.balance |currency:"USD":"symbol"}}
+        {{client.debit |currency:"USD":"symbol"}}
         </span>
         <small>
           <a (click)="showBalanceUpdateInput=!showBalanceUpdateInput">
@@ -42,7 +47,7 @@
           <div class="input-group">
             <input type="text" name="balance" class="form-control" [(ngModel)]= "client.balance">
             <span class="input-group-btn">
-              <button  class="btn btn-primary" (click)="showBalanceUpdateInput=!showBalanceUpdateInput" (click)="updateBalance()">Update</button>
+              <button  class="btn btn-primary" (click)="showBalanceUpdateInput=!showBalanceUpdateInput" >Update</button>
             </span>
 
           </div>
@@ -58,5 +63,9 @@
     <li class="list-group-item">Contact Phone: {{client.phone}}</li>
 
   </ul>
+  <div  class="cold-md-8 col-sm-6">
+    <br>
+      <h4>Request Status : {{client.status}}</h4>
+  </div>
 </div>
 </div>

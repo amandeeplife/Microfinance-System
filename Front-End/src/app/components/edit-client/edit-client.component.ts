@@ -14,11 +14,13 @@ export class EditClientComponent implements OnInit {
 
   id:number;
   client:Client = {
-    firstName:'',
-    lastName:'',
-    email:'',
-    phone:'',
-    balance:0
+   firstName: '',
+    lastName: '',
+    age:0,
+    email: '',
+    password:'',
+    phone:'' ,
+    debit:0 
   };
 disableBalanceOnEdit:boolean = true;
 
@@ -38,10 +40,10 @@ disableBalanceOnEdit:boolean = true;
   console.log(this.client)
   }
   updateBalance(){
-    this.clientService.updateClient(this.client) 
-    this.flashMessage.show("Balance updated",{
-  cssClass:'alert-success',timeout:3000
-  });
+  //   this.clientService.updateClient(this.client) 
+  //   this.flashMessage.show("Balance updated",{
+  // cssClass:'alert-success',timeout:3000
+  // });
    }
 
    onSubmit({value,valid}:{value:Client, valid:boolean}){
@@ -62,6 +64,7 @@ disableBalanceOnEdit:boolean = true;
        }
       
      }
+   
 
    }
 

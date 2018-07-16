@@ -19,10 +19,11 @@ export class ClientService {
   newClient(val){
     val.id=++this.id;
     this.clients.push(val)
+    console.log(this.clients)
   }
   getClients(){
 
-    return this.clients
+    return [{id:"1",firstName:"Amanuel",lastName:"Tassew",age:12,email:"amanuel.tassew1@gmail.com",password:"123",phone:"123",salary:10000,debit:111}]
   }
   getClient(val){
    
@@ -32,7 +33,7 @@ export class ClientService {
       }
     }
 
-    return this.client
+    return {id:"1",firstName:"Amanuel",lastName:"Tassew",age:12,email:"amanuel.tassew1@gmail.com",password:"123",phone:"123",salary:10000,debit:111,status:"pending"}
   }
   updateClient(currentClient){
     this.client = this.getClient(currentClient.id);
