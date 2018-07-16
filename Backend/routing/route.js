@@ -24,7 +24,7 @@ const stripe= require("stripe")
 //             res.end();}
 //     })
 // })
-router.get('/users', verifyToken, function(req,res){ 
+router.get('/api/users', verifyToken, function(req,res){ 
     jwt.verify(req.token,'secretkey', (err, authData)=>{
 if(err){
     res.sendStatus(403)
@@ -35,7 +35,7 @@ else{
     });   
 });
 
-router.get('/:id',verifyToken, function(req,res){
+router.get('/api/:id',verifyToken, function(req,res){
     jwt.verify(req.token,'secretkey', (err, authData)=>{
         if(err){
             res.sendStatus(403)
@@ -45,7 +45,7 @@ router.get('/:id',verifyToken, function(req,res){
     });
    
  });
- router.delete('/:id',function(req,res){
+ router.delete('/api/:id',function(req,res){
      console.log("am in delete")
     /*jwt.verify(req.token),'secretkey', (err, authData)=>{
      if(err){
@@ -60,12 +60,12 @@ router.get('/:id',verifyToken, function(req,res){
         //}  
      //}  
 })
-router.put('/:id', function(req, res){
+router.put('/api/:id', function(req, res){
     let user  = new User(req.body.email,req.body.firstName, req.body.lastName,req.body.age,req.body.password,req.body.phone,req.body.accountId, req.body.currentDebit,req.body.salary,req.body.status,req.body.debitHistory,req.body.transactionHistory)
     userService.updateById(user)
     res.end()
 })
-router.put('/userEdit/:name', function(req, res){
+router.put('api/update/:name', function(req, res){
     userService.updateByName(req.params.name)
     res.end()
 })
@@ -81,7 +81,7 @@ if(typeof bearerHeader!=='undefined'){
     res.sendStatus(403);
 }
 }
-router.post('/signup', (req,res,next)=>{
+router.post('/api/signup', (req,res,next)=>{
     console.log("am here singingup")
    UserData.find({email:req.body.email}).exec()
    .then(user=>{
@@ -101,7 +101,7 @@ router.post('/signup', (req,res,next)=>{
               }
            })      
 })
-router.post('/login',(req,res,next)=>{
+router.post('/api/login',(req,res,next)=>{
     UserData.find({email:req.body.email}).exec().then(user=>{
             console.log("am here comparing")
             console.log(user[0].email)   
@@ -122,7 +122,7 @@ router.post('/login',(req,res,next)=>{
 })
 
 
-router.patch('/:id', (req, res, next)=>{
+router.patch('/api/:id', (req, res, next)=>{
     console.log("am patching")
     const id= req.params.accountId
     // const updateops={};
@@ -141,7 +141,7 @@ res.status(500).json({
     
 })
 })
-router.post('/charge', function(req, res){
+router.post('/api/charge', function(req, res){
         var token2= req.body.stripeToken;
         var chargeAmount= req.body.chargeAmount;
         var charge= stripe.charges.create({
