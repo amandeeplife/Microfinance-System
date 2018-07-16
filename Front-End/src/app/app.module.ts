@@ -21,7 +21,7 @@ import { CurrentUserDetailComponent } from './clientside/currentuserdetail/curre
 import { ClientLoginComponent } from './clientside/client-login/client-login.component';
 import { Module as StripeModule } from "stripe-angular";
 import { LandingComponent } from './components/landing/landing.component'
-
+import { HttpClientModule } from '@angular/common/http'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,10 +45,11 @@ import { LandingComponent } from './components/landing/landing.component'
     FlashMessagesModule.forRoot(),
     FormsModule,
     BrowserModule,
+    HttpClientModule,
      AppRoutingModule,
      StripeModule 
   ],
-  providers: [ ],
+  providers: [],
    bootstrap: [AppComponent]
 })
 export class AppModule { }

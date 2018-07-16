@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ClientService } from '../../services/client.service';
 import { Router } from '@angular/router';
- 
+
+import {AuthtestService} from '../../services/authtest.service'
 
 @Component({
   selector: 'app-add-client',
@@ -29,13 +30,14 @@ export class AddClientComponent implements OnInit {
   constructor(
     private flashMessage: FlashMessagesService,
     private clientService: ClientService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
   }
 
   onSubmit({value, valid}: {value, valid: boolean}) {
+    console.log(value)
     if(this.disableBalanceOnAdd) {
       value.debit = 0;
     }
@@ -45,7 +47,8 @@ export class AddClientComponent implements OnInit {
         cssClass: 'alert-danger', timeout: 4000
       });
     } else {
-       this.clientService.newClient(value);
+
+      this.clientService.newClient(value);
        this.flashMessage.show('New client added', {
         cssClass: 'alert-success', timeout: 4000
       }); 
