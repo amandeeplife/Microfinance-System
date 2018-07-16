@@ -9,13 +9,23 @@ class UserService{
     constructor(){
       //this.users=[{"name": "Behailu"}]
     }
-    addUser(accountId, name, age, salary, email,password){
-       var myuser={accountId:accountId,
-        name: name, 
-        age: age, 
-        salary: salary, 
-        email: email,
-        password:password}
+    addUser(email,firstName,lastName,age, password, phone, accountId, currentDebit, salary, status, debitHistory,transactionHistory){
+       var myuser={
+        email: email, 
+        firstName: firstName, 
+        lastName: lastName, 
+        age:age,
+        password: password,
+        phone:phone,
+        accountId:accountId,
+        currentDebit:currentDebit,
+        salary:salary,
+        status:status,
+        debitHistory:debitHistory,
+        transactionHistory:transactionHistory,
+      
+
+    }
         var data= new UserData(myuser)
         data.save()
     }

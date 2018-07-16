@@ -8,20 +8,21 @@ const mongoose= require("mongoose")
 
  userService= new UserService();
 
-router.post('/addUsers', verifyToken, function(req,res)
-{ jwt.verify(req.token, 'secretkey', (err, authData)=>{
-        if(err){
-            res.sendStatus(403)
-        } else{
-        userService.addUser(req.body.accountId, req.body.name, req.body.age, req.body.salary, req.body.email);
-        console.log("added user is"+req.body.name)
-            res.json({
-             message: 'postCreated...',
-              authData
-            })
-            res.end();}
-    })
-})
+// router.post('/addUsers', verifyToken, function(req,res)
+// { jwt.verify(req.token, 'secretkey', (err, authData)=>{
+//         if(err){
+//             res.sendStatus(403)
+//         } else{
+    
+// userService.addUser(req.body.email,req.body.firstName,req.body.lastName,req.body.age,req.body.password, req.body.phone,req.body.accountId, req.body.currentDebit,req.body.salary,req.body.status,req.body.debitHistory,req.body.transactionHistory);
+//     console.log("added user is"+req.body.firstname)
+//             res.json({
+//              message: 'postCreated...',
+//               authData
+//             })
+//             res.end();}
+//     })
+// })
 router.get('/users', verifyToken, function(req,res){ 
     jwt.verify(req.token,'secretkey', (err, authData)=>{
 if(err){
@@ -59,7 +60,7 @@ router.get('/:id',verifyToken, function(req,res){
      //}  
 })
 router.put('/:id', function(req, res){
-    let user  = new User(req.body.accountId, req.body.name, req.body.age, req.body.salary, req.body.email)
+    let user  = new User(req.body.email,req.body.firstName, req.body.lastName,req.body.age,req.body.password,req.body.phone,req.body.accountId, req.body.currentDebit,req.body.salary,req.body.status,req.body.debitHistory,req.body.transactionHistory)
     userService.updateById(user)
     res.end()
 })
@@ -88,12 +89,13 @@ router.post('/signup', (req,res,next)=>{
                message:"mail exists"
            })
        } else{
-            userService.addUser(req.body.accountId,req.body.name, req.body.age, req.body.salary, req.body.email,req.body.password);    
-            console.log("added user is"+req.body.name)
+            userService.addUser(req.body.email,req.body.firstName, req.body.lastName,req.body.age,req.body.password,req.body.phone,req.body.accountId, req.body.currentDebit,req.body.salary,req.body.status,req.body.debitHistory,req.body.transactionHistory);    
+           // console.log("added user is"+req.body.name)
             res.json({
              message: 'postCreated...',
-              
+         
             })
+            console.log("***** "+req.body.firstName)
             res.end();
               }
            })      
@@ -117,6 +119,28 @@ router.post('/login',(req,res,next)=>{
         })
     })
 })
+
+
+router.patch('/:id', (req, res, next)=>{
+    console.log("am patching")
+    const id= req.params.accountId
+    const updateops={};
+    for(const opps of req.body){
+        updateops[opps.propName]=opps.value;
+    }
+    UserData.update({accountId:id},{$set:updateops}).exec().then(result=>{
+        console.log("update is" +req.body.firstName);
+        res.status(200).json(result)
+    
+    }).catch(err=>{
+console.log(err);
+res.status(500).json({
+    error:err
+})
+    
+})
+})
+    
 
 
 module.exports=router

@@ -1,5 +1,6 @@
 
 
+
 var mongoose = require("mongoose")
 
 mongoose.connect("mongodb://localhost:27017/MicroFinance")
@@ -11,15 +12,19 @@ var userDataSchema= new Schema({
         unique: true,
         //match:"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$"
     },
+    firstName:String,
+    lastName: String,
+    age:Number,
     password: {
-        type:String,
-        required:true},
+      type:String,
+      required:true},
+    phone:String,
     accountId:String,
-    name: String,
-    AccountId: String,
-    age: String,
+    currentDebit: String,
     salary: String,
-    email: String}, {collection:"Client"});
+    status: String,
+    debitHistory: Object,
+    transactionHistory: Object}, {collection:"Client"});
 
 module.exports=mongoose.model('UserData', userDataSchema);
 

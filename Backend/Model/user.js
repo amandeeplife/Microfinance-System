@@ -1,15 +1,23 @@
 
 class User{
 
-    constructor(accountId,name, email, password, age, salary){
+    constructor(email,firstName, lastName, age,password,phone, accountId, currentDebit, salary,status, debitHistory,transactionHistory){
 
     var users={};
-    this.accountId= accountId;
-    this.name=name;
-    this.age=age;
-    this.salary=salary;
     this.email=email;
-    this.password=password
+    this.firstName= firstName;
+    this.lastName=lastName;
+    this.age=age;
+    this.password=password;
+    this.phone=phone;
+    this.accountId=accountId;
+    this.currentDebit=currentDebit;
+    this.salary= salary;
+    this.status=status;
+    this.debitHistory=debitHistory;
+    this.transactionHistory=transactionHistory;
+   
+    
 
 }
 }
