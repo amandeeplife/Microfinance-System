@@ -3,8 +3,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { ClientService } from '../../services/client.service';
 import { Router } from '@angular/router';
 
-import {AuthtestService} from '../../services/authtest.service'
-
+ 
 @Component({
   selector: 'app-add-client',
   templateUrl: './add-client.component.html',

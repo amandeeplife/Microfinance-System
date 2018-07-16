@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router,ActivatedRoute,Params} from '@angular/router'
 import {FlashMessagesService} from 'angular2-flash-messages'
 import { Client } from '../../model/Client';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-client-details',
@@ -19,12 +20,13 @@ export class ClientDetailsComponent implements OnInit {
   constructor(private clientService:ClientService,
   private router:Router,
   private route:ActivatedRoute,
-  private flashMessage:FlashMessagesService
+  private flashMessage:FlashMessagesService,
+  private authService : AuthService
   ) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-  this.client =   this.clientService.getClient(this.id);
+    // this.id = this.route.snapshot.params['id'];
+     this.clientService.getClient(this.authService.currentUser).subscribe(data=>console.log(data+"inside first"));
   if(this.client.salary>0){
     this.hasBalance = true;
   }

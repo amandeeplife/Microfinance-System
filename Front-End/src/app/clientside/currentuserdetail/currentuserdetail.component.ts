@@ -5,6 +5,8 @@ import {ClientService} from '../../services/client.service';
 import { Component, OnInit } from '@angular/core';
 import {Router,ActivatedRoute,Params} from '@angular/router'
 import {FlashMessagesService} from 'angular2-flash-messages'
+import { AuthService } from '../../services/auth.service';
+import { Client } from '../../model/Client';
   
 
 @Component({
@@ -15,37 +17,61 @@ import {FlashMessagesService} from 'angular2-flash-messages'
 export class CurrentUserDetailComponent implements OnInit {
   private myTemplate: any = "";
   id:number;
-  client;
+ 
   hasBalance:boolean = false;
   showBalanceUpdateInput : boolean = false;
   messageCount =1;
-  tempUser ={id: 2,
-    firstName: "Amanuel",
-    lastName: "Tassew",
-    email: "amtassew@mum.edu",
-    phone: 12312323213,
-    balance: 1500}
-
+  // client ={ 
+   
+  //   firstName: '',
+  //   lastName: '',
+  //   age:'',
+  //   email: '',
+  //   password:'',
+  //   phone: '',
+  //   debit: '',
+  //   salary:'',
+  //   status:''}
+ 
+ client:Client;
   constructor(private clientService:ClientService,
   private router:Router,
   private route:ActivatedRoute,
+  private authService : AuthService,
   private flashMessage:FlashMessagesService
-  ) { }
+  ) { 
 
-  ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-  // this.client =   this.clientService.getClient(this.id);
-    this.client = this.tempUser;
-    if(this.client.balance>0){
-    this.hasBalance = true;
-       }
-   }
+
     
+   
+
+  
+  }
+  
+ 
+  ngOnInit() {
+    this.client =this.authService.currentUser
+
+   //this.client.firstName = this.authService.currentUser.firstName;
+
+    // this.id = this.route.snapshot.params['id'];
+  // this.client =   this.clientService.getClient(this.id);
+    // this.client = this.tempUser;
+    // if(this.client.balance>0){
+    // this.hasBalance = true;
+    //    }
+   }
+  
+   onEdit(){
+     this.router.navigate(['/client/edit/'])
+   }
   onMessage(){ 
    }
 
  
-
+ 
+  //  let fetchedUser = this.authService.currentUser
+  
 
 
    

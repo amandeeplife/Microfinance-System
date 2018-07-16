@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/auth.service'
+import {ClientService} from '../../services/client.service'
 import {FlashMessagesService} from 'angular2-flash-messages'
 import {Router} from '@angular/router'
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -14,9 +15,10 @@ export class LoginComponent implements OnInit {
   password:string;
   isAdmin:boolean=false;
 
-  constructor(private authService:AuthService,
+  constructor( 
           private router:Router,
-          private flashMessage:FlashMessagesService  
+          private flashMessage:FlashMessagesService ,
+          private authService:AuthService
   ) { }
 
   ngOnInit() {
@@ -25,27 +27,37 @@ export class LoginComponent implements OnInit {
     //   this.router.navigate(['/'])
     // }
   }
-  onSubmit(){
-    if (this.email=="admin@admin.com"){
-      this.authService.authUser=this.email;
+    sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-      this.router.navigate(['/'])
-    }
+  async onSubmit(){
 
-  else if( this.authService.login(this.email,this.password)==true&& this.isAdmin==true){
-     this.authService.authUser=this.email;
-     this.router.navigate(['/'])
-   }
+      this.authService.login(this.email,this.password)
+      await this.sleep(200)
+     
+        if (this.email=="admin@admin.com"){
    
-   else if (this.authService.login(this.email,this.password)==true&&this.isAdmin==false){
-    this.authService.authUser=this.email;
-    this.router.navigate(['clientside/dashboard'])
-  }
-   else{
-     this.flashMessage.show("Wrong password/username",{
-       cssClass:'alert-danger',  timeout:4000
-     })
-    }
+          this.router.navigate(['/'])
+        }
+    
+      // else if( this.authService.login(this.email,this.password)!=null&& this.isAdmin==true){
+      //   //  this.authService.authUser=this.email;
+      //    this.router.navigate(['/'])
+      //  }
+       
+       else if (this.authService.authentication==true){
+        // this.authService.authUser=this.email;
+        this.router.navigate(['clientside/dashboard'])
+        console.log(this.authService.getToken()+"--->")
+      }
+       else{
+         this.flashMessage.show("Wrong password/username",{
+           cssClass:'alert-danger',  timeout:4000
+         })
+        }
+      
+    
   }
   register(){
     this.router.navigate(['register'])

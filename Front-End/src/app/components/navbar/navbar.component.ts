@@ -9,23 +9,26 @@ import {FlashMessagesService} from 'angular2-flash-messages'
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isLoggedIn:boolean=false;
+  isLoggedIn:boolean;
   
   loggedInUser:string;
   showRegister:boolean;
-
+  token
   constructor(private authService:AuthService,
     private router:Router,
-     private flashMessage:FlashMessagesService) { }
+     private flashMessage:FlashMessagesService) {this.token=  this.authService.getToken()  }
 
+ 
   ngOnInit() {
+
     // this.authService.getAuth
-   let auth=false; //to be changed latter
-    if(auth){
+ console.log(this.authService.getToken()+">>>>>")
+    if(this.authService.getToken()!=undefined){
+     
       this.isLoggedIn = true;
       this.loggedInUser ="amtassew@mum.edu"//this.authService.getAuth();
       console.log(this.loggedInUser)
-
+ 
     }else {
       this.isLoggedIn = false;
     }
@@ -35,7 +38,7 @@ export class NavbarComponent implements OnInit {
     this.flashMessage.show("You are logged out",{
       cssClass: 'alert-success',timeout:4000
     })
-    this.router.navigate(['/login'])
+   
   }
 
 }
