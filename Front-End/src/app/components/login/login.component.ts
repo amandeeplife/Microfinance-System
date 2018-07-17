@@ -13,6 +13,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   email:string;
   password:string;
+  forAdmin=""
   isAdmin:boolean=false;
 
   constructor( 
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
       await this.sleep(200)
      
         if (this.email=="admin@admin.com"){
-   
+          this.forAdmin = "Admin Panel"
           this.router.navigate(['/'])
         }
     

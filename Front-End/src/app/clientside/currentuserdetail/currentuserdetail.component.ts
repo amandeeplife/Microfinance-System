@@ -2,12 +2,30 @@
 
 
 import {ClientService} from '../../services/client.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import {Router,ActivatedRoute,Params} from '@angular/router'
 import {FlashMessagesService} from 'angular2-flash-messages'
 import { AuthService } from '../../services/auth.service';
 import { Client } from '../../model/Client';
   
+import { StripeToken } from "stripe-angular"
+
+const template=
+`
+<div *ngIf="invalidError" style="color:red">
+  {{ invalidError.message }}
+</div>
+ 
+<stripe-card
+  #stripeCard
+  (catch) = "onStripeError($event)"
+  ([invalid]) = "invalidError"
+  (tokenChange) = "setStripeToken($event)"
+></stripe-card>
+ 
+<button type="button" (click)="stripeCard.createToken(extraData)">createToken</button>
+`
+
 
 @Component({
   selector: 'currnetuserdetail',
@@ -32,25 +50,36 @@ export class CurrentUserDetailComponent implements OnInit {
   //   debit: '',
   //   salary:'',
   //   status:''}
- 
- client:Client;
+  cardNumber: string;
+  expiryMonth: string;
+  expiryYear: string;  message: string;
+  cvc: string;
+ client:Client={};
   constructor(private clientService:ClientService,
   private router:Router,
   private route:ActivatedRoute,
   private authService : AuthService,
+  private elementRef:ElementRef,
   private flashMessage:FlashMessagesService
   ) { 
 
 
-    
+    this.client =this.authService.currentUser
+
    
 
   
   }
-  
  
+
   ngOnInit() {
-    this.client =this.authService.currentUser
+    
+    setTimeout(function(){ console.log(this.client.status=="Accepted"+this.client.status)
+    if(this.client.status=="Accepted"){
+      this.flashMessage.show("Client Request Accepted",{
+        cssClass:'alert-success',timeout:3000
+      });
+    }},1000)
 
    //this.client.firstName = this.authService.currentUser.firstName;
 
@@ -61,7 +90,7 @@ export class CurrentUserDetailComponent implements OnInit {
     // this.hasBalance = true;
     //    }
    }
-  
+ 
    onEdit(){
      this.router.navigate(['/client/edit/'])
    }
