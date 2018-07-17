@@ -22,6 +22,8 @@ import { ClientLoginComponent } from './clientside/client-login/client-login.com
 import { Module as StripeModule } from "stripe-angular";
 import { LandingComponent } from './components/landing/landing.component'
 import { HttpClientModule } from '@angular/common/http'; 
+import {AgmCoreModule} from '@agm/core'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
      AppRoutingModule,
-     StripeModule 
+     StripeModule ,
+     AgmCoreModule.forRoot({
+       apiKey:'AIzaSyDi-VWFqep3iZ8J2cHZAiG3Ed9pi3M5Fic'
+     })
   ],
   providers: [],
    bootstrap: [AppComponent]

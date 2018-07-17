@@ -21,14 +21,15 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
-            ],
+                        ],
             "styles": [
               "src/styles.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "./custom-scripts/custom.js",
+              "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js",
+             "https://checkout.stripe.com/v2/checkout.js",
               "node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"

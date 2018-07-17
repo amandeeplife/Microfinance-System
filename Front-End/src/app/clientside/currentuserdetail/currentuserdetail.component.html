@@ -2,8 +2,9 @@
         <div class="col-md-6">
            
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6">locations
       <div class="btn-group pull-right">
+          <button routerLink="locations" class="btn btn-dark">Locations</button>
         <button routerLink="../edit" class="btn btn-dark">Edit</button>
           
        </div>
@@ -52,17 +53,11 @@
       
         </ul>
       </div>
-      
-      <h4>Request Status : {{client.status}}</h4>
-      </div>
+      <div>
+      <h4>Request Status : {{client.status}}</h4></div>
+      <hr>
+    <h2 cla>Looking for near by officess?</h2>
+      <agm-map [latitude]="lat" [longitude]="lng"></agm-map>
 
- 
-	
-<div class="form-group">
-    <button type="submit" class="btn btn-default" (click)="buyTShirt()">T-Shirt (£10)</button>
-    <button type="submit" class="btn btn-default" (click)="buyTrainers()">Trainers (£15)</button>
-    <button type="submit" class="btn btn-default" (click)="buyJeans()">Jeans (£20)</button>
-</div>
-<div class="form-group" *ngIf="takePaymentResult">
-    <p>Payment Result: {{takePaymentResult}}</p>
-</div>
+      </div>
+   

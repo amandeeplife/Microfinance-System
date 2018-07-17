@@ -1,6 +1,4 @@
-
-
-
+ 
 import {ClientService} from '../../services/client.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import {Router,ActivatedRoute,Params} from '@angular/router'
@@ -10,23 +8,7 @@ import { Client } from '../../model/Client';
   
 import { StripeToken } from "stripe-angular"
 
-const template=
-`
-<div *ngIf="invalidError" style="color:red">
-  {{ invalidError.message }}
-</div>
  
-<stripe-card
-  #stripeCard
-  (catch) = "onStripeError($event)"
-  ([invalid]) = "invalidError"
-  (tokenChange) = "setStripeToken($event)"
-></stripe-card>
- 
-<button type="button" (click)="stripeCard.createToken(extraData)">createToken</button>
-`
-
-
 @Component({
   selector: 'currnetuserdetail',
   templateUrl: './currentuserdetail.component.html',
@@ -50,6 +32,8 @@ export class CurrentUserDetailComponent implements OnInit {
   //   debit: '',
   //   salary:'',
   //   status:''}
+  lat: number = 41.1392637;
+  lng: number = -73.3313014;
   cardNumber: string;
   expiryMonth: string;
   expiryYear: string;  message: string;
@@ -65,12 +49,15 @@ export class CurrentUserDetailComponent implements OnInit {
 
 
     this.client =this.authService.currentUser
-
-   
-
-  
   }
- 
+ ngAfterViewInit() {
+   //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+   //Add 'implements AfterViewInit' to the class.
+   var s = document.createElement("script")
+   s.type = "text/javascript"
+   s.src = "assets/custom.js"
+   this.elementRef.nativeElement.appendChild(s)
+ }
 
   ngOnInit() {
     
