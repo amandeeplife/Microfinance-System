@@ -16,25 +16,36 @@ export class NavbarComponent implements OnInit {
   token
   constructor(private authService:AuthService,
     private router:Router,
-     private flashMessage:FlashMessagesService) {this.token=  this.authService.getToken()  }
+     private flashMessage:FlashMessagesService) {this.token=  this.authService.getToken()
+    
+      this.isLoggedIn = true;
+     
+    
+    }
 
- 
+ ngAfterViewChecked() {
+   //Called after every check of the component's view. Applies to components only.
+   //Add 'implements AfterViewChecked' to the class.
+   this.loggedInUser =this.authService.currentUser.email
+ }
   ngOnInit() {
 
     // this.authService.getAuth
  console.log(this.authService.getToken()+">>>>>")
     if(this.authService.getToken()!=undefined){
      
-      this.isLoggedIn = true;
-      this.loggedInUser ="amtassew@mum.edu"//this.authService.getAuth();
-      console.log(this.loggedInUser)
+     
+    
+      console.log(this.authService.currentUser.email)
  
     }else {
       this.isLoggedIn = false;
     }
   }
   onLogOutClick(){
+    this.authService.setIsloggedInFalse();
     this.authService.logOUt()
+    this.router.navigate(['/login'])
     this.flashMessage.show("You are logged out",{
       cssClass: 'alert-success',timeout:4000
     })

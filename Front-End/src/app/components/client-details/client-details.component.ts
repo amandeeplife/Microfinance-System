@@ -11,26 +11,47 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./client-details.component.css']
 })
 export class ClientDetailsComponent implements OnInit {
-
+  
+  isLoggedin=false;
   id:number;
-  client:Client;
+  client:Client={};
   hasBalance:boolean = false;
   showBalanceUpdateInput : boolean = false;
   currentUserisAdmin=true;
+  currentUseracct:number=0
   constructor(private clientService:ClientService,
   private router:Router,
   private route:ActivatedRoute,
   private flashMessage:FlashMessagesService,
   private authService : AuthService
-  ) { }
+  ) {     
+    this.authService.getClientbyAccountId(this.route.snapshot.params.id).subscribe(data=>{ 
+       
+      this.isLoggedin=this.authService.isLogged;
+
+
+      this.client.firstName =data[0].firstName
+      this.client.lastName =data[0].lastName
+      this.client.age =data[0].age
+      this.client.salary =data[0].salary
+      this.client.email =data[0].email
+      this.client.debit =data[0].currentDebit
+      this.client.phone =data[0].phone
+      this.client.status =data[0].status
+      this.client.accountId =data[0].accountId
+
+      
+       })}
 
   ngOnInit() {
+
+
     // this.id = this.route.snapshot.params['id'];
-     this.clientService.getClient(this.authService.currentUser).subscribe(data=>console.log(data+"inside first"));
-  if(this.client.salary>0){
-    this.hasBalance = true;
-  }
-  console.log(this.client)
+  //    this.clientService.getClient(this.authService.currentUser).subscribe(data=>console.log(data+"inside first"));
+  // if(this.client.salary>0){
+  //   this.hasBalance = true;
+  // }
+  // console.log(this.client)
   }
   updateBalace(){
 this.clientService.updateClient(this.client) 
@@ -39,7 +60,9 @@ this.flashMessage.show("Balance updated",{
 });
    }
 
-   onAcceptClick(){
+   onAcceptClick(acct){
+ 
+    this.clientService.setStatus(acct)
     this.flashMessage.show("Client Request Accepted",{
       cssClass:'alert-success',timeout:3000
     });

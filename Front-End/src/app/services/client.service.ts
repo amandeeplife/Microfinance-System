@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {ClientsComponent} from '../components/clients/clients.component'
 import { Client } from '../model/Client';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { Http, Headers, Response } from '@angular/http';
 import { AuthService } from './auth.service';
-
+  
 @Injectable({
   providedIn: 'root'
 })
@@ -54,12 +54,18 @@ export class ClientService {
 
   getClients(){
 
-    return [{id:"1",firstName:"Amanuel",lastName:"Tassew",age:12,email:"amanuel.tassew1@gmail.com",password:"123",phone:"123",salary:10000,debit:111}]
+    return this.httpClient.get('http://localhost:5100/users');
   }
     headers = new Headers();
+
+  setStatus(id){
+    let obj={accountId:id}
+   return this.httpClient.post('http://localhost:5100/client', obj).subscribe(data=>console.log(data))
+  }  
   getClient(val){
     return this.httpClient.get('http://localhost:9898/')
       }
+ 
   updateClient(currentClient){
     // this.client = this.getClient(currentClient.id);
       this.clientsComponent.getTotalOwed()

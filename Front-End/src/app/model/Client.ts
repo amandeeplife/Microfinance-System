@@ -1,12 +1,12 @@
 export interface Client {
-    id?: string;
+  accountId?: string;
     firstName?: string;
     lastName?: string;
     age?:number;
     email?: string;
     password?:string;
     phone?: string;
-    debit?: number;
+    debit?: string;
     salary?:number;
     status?:string
   }
