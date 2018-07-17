@@ -60,15 +60,21 @@ router.get('/api/:id',verifyToken, function(req,res){
         //}  
      //}  
 })
-router.put('/api/:id', function(req, res){
-    let user  = new User(req.body.email,req.body.firstName, req.body.lastName,req.body.age,req.body.password,req.body.phone,req.body.accountId, req.body.currentDebit,req.body.salary,req.body.status,req.body.debitHistory,req.body.transactionHistory)
-    userService.updateById(user)
+router.put('/api/:', function(req, res){
+   console.log("am putting")
+    //userService.updateById(req.params.id).then(data=>{res.json(data)})
+
+    let myuser  = new User(req.body.email,req.body.firstName, req.body.lastName,req.body.age,req.body.password,req.body.phone,req.body.accountId, req.body.currentDebit,req.body.salary,req.body.status,req.body.debitHistory,req.body.transactionHistory)
+    var data= new UserData(myuser)
+    console.log("new name is"+myuser.firstName)
+        data.save()
+
     res.end()
 })
-router.put('api/update/:name', function(req, res){
-    userService.updateByName(req.params.name)
-    res.end()
-})
+// router.put('api/update/:name', function(req, res){
+//     userService.updateByName(req.params.name)
+//     res.end()
+// })
 function verifyToken(req,res,next){  
 var bearerHeader = req.headers["authorization"];
 if(typeof bearerHeader!=='undefined'){
@@ -101,6 +107,10 @@ router.post('/api/signup', (req,res,next)=>{
               }
            })      
 })
+
+
+/* Update new application */
+
 router.post('/api/login',(req,res,next)=>{
     UserData.find({email:req.body.email}).exec().then(user=>{
             console.log("am here comparing")

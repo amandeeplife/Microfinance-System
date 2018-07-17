@@ -36,7 +36,7 @@ export class ClientService {
 };
 
  
-    this.httpClient.post('http://localhost:5100/signup',  obj)
+    this.httpClient.post('http://localhost:9898/api/signup',  obj)
     .subscribe(data => {
       console.log(data);
     },
@@ -58,7 +58,7 @@ export class ClientService {
   }
     headers = new Headers();
   getClient(val){
-    return this.httpClient.get('http://localhost:5100/')
+    return this.httpClient.get('http://localhost:9898/')
       }
   updateClient(currentClient){
     // this.client = this.getClient(currentClient.id);
