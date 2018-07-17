@@ -16,10 +16,10 @@ export class CurrentUserDashboardComponent implements OnInit {
   ngAfterViewInit() {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
-    var s = document.createElement("script")
-    s.type = "text/javascript"
-    s.src = "./custom-scripts/custom.js"
-    this.elementRef.nativeElement.appendChild(s)
+    // var s = document.createElement("script")
+    // s.type = "text/javascript"
+    // s.src = "./custom-scripts/custom.js"
+    // this.elementRef.nativeElement.appendChild(s)
   }
  
 }
