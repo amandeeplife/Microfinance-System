@@ -48,7 +48,7 @@ export class AddClientComponent implements OnInit {
     } else {
 
       this.clientService.newClient(value);
-       this.flashMessage.show('New client added', {
+       this.flashMessage.show('Successfuly Registered!', {
         cssClass: 'alert-success', timeout: 4000
       }); 
       this.router.navigate(['login']);

@@ -28,9 +28,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js",
-             "https://checkout.stripe.com/v2/checkout.js",
-              "node_modules/jquery/dist/jquery.js",
+               "node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]

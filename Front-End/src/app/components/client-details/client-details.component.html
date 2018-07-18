@@ -7,14 +7,16 @@
   <div class="col-md-6">
 <div class="btn-group pull-right">
   <div *ngIf="currentUserisAdmin">
+    
       <button (click)="onAcceptClick(client.accountId)" class="btn btn-primary">Accept  </button>
- 
+      <button (click)="onAcceptClick(client.accountId)" class="btn btn-danger">Decline  </button>
+      <hr>
   <!-- </div>
   <a routerLink="/client/edit/{{id}}" class="btn btn-dark">
      Edit 
   </a> -->
 
-  <button (click)="onDeleteClick()" class="btn btn-danger">Delete</button></div>
+  </div>
 </div>
   </div>
 </div>
@@ -23,7 +25,7 @@
 <div class="card-body">
   <div class="row">
     <div class="cold-md-8 col-sm-6">
-      <h4>Client ID:{{client.id}}</h4>
+      <h4>Client ID:{{client.accountId}}</h4>
     </div>
     
     <div class="cold-md-8 col-sm-6">
@@ -59,13 +61,16 @@
   </div>
   <hr>
   <ul class="list-group">
-    <li class="list-group-item">Contact Email: {{client.email}}</li>
-    <li class="list-group-item">Contact Phone: {{client.phone}}</li>
+    <li class="list-group-item">Email: {{client.email}}</li>
+    <li class="list-group-item">Phone: {{client.phone}}</li>
+    <li class="list-group-item">Salary: {{client.salary}}</li>
+    <li class="list-group-item">Age: {{client.age}}</li>
+
 
   </ul>
   <div  class="cold-md-8 col-sm-6">
     <br>
-      <h4>Request Status : {{client.status}}</h4>
+      <h4>Request Status : {{client.status}}</h4> <button (click)="onDeleteClick(client.accountId)" class="btn btn-danger pull-right">Delete</button>
   </div>
 </div>
 </div>

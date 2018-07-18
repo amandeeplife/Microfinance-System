@@ -1,0 +1,15 @@
+<form action="http://localhost:5100/charge" method="post">
+	<script
+		src="https://checkout.stripe.com/checkout.js"
+		class = "stripe-button"
+		data-key = "pk_test_nTlDQv2r9x3WyKgAr6wgzoqW"
+		data-amount = "300"
+		data-name="Microfinance"
+		data-description = "This is Microfinance"
+		data-locate = "auto"
+		data-currentcy = "USD" 
+	>
+	</script>
+	<input type="hidden" name="chargeAmmout" value="300">
+	<input type="hidden" name="email" value="aman@gmail.com">
+</form>

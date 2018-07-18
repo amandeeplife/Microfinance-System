@@ -34,6 +34,7 @@ export class CurrentUserDetailComponent implements OnInit {
   //   status:''}
   lat: number = 41.1392637;
   lng: number = -73.3313014;
+  
   cardNumber: string;
   expiryMonth: string;
   expiryYear: string;  message: string;

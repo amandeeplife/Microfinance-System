@@ -15,16 +15,16 @@ export class ClientsComponent implements OnInit {
   constructor(private clientService: ClientService) { 
     this.clientService.getClients().toPromise().then(data=>{
    console.log(data)
-      this.client.accountId = data[0].accountId
-      this.client.firstName = data[0].firstName
-      this.client.lastName = data[0].lastName
-      this.client.age = data[0].firstName
-      this.client.email = data[0].email
-      this.client.salary = data[0].salary
-      this.client.debit = data[0].currentDebit
+      // this.client.accountId = data[0].accountId
+      // this.client.firstName = data[0].firstName
+      // this.client.lastName = data[0].lastName
+      // this.client.age = data[0].firstName
+      // this.client.email = data[0].email
+      // this.client.salary = data[0].salary
+      // this.client.debit = data[0].currentDebit
   
-      this.clients.push(this.client)
-      this.client={}
+      // this.clients.push(this.client)
+      // this.client={}
       this.client.accountId = data[1].accountId
 
       this.client.firstName = data[1].firstName

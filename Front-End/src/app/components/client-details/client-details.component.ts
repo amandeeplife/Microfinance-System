@@ -16,6 +16,8 @@ export class ClientDetailsComponent implements OnInit {
   id:number;
   client:Client={};
   hasBalance:boolean = false;
+  isAccepted
+
   showBalanceUpdateInput : boolean = false;
   currentUserisAdmin=true;
   currentUseracct:number=0
@@ -39,9 +41,12 @@ export class ClientDetailsComponent implements OnInit {
       this.client.phone =data[0].phone
       this.client.status =data[0].status
       this.client.accountId =data[0].accountId
+     
+      if(this.client.accountId=="Pending"){this.isAccepted=true}
 
       
        })}
+      
 
   ngOnInit() {
 
@@ -67,5 +72,13 @@ this.flashMessage.show("Balance updated",{
       cssClass:'alert-success',timeout:3000
     });
     this.client.status="Accepted";
+   }
+
+   onDeleteClick(acct){
+      this.clientService.deleteUser(acct)
+      this.flashMessage.show("Client  deleted",{
+        cssClass:'alert-danger',timeout:3000
+      });
+      this.router.navigate([''])
    }
 }

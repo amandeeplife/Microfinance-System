@@ -16,11 +16,11 @@ import {ClientLoginComponent} from './clientside/client-login/client-login.compo
 import {CurrentUserDashboardComponent} from './clientside/currentuserdashboard/currentuserdashboard.component'
 import {AuthGuard} from './guard/auth.guard'
 const routes: Routes = [
-  {path:'', component:DashboardComponent, canActivate:[AuthGuard]},
+  {path:'', component:DashboardComponent},
   {path:'login', component:LoginComponent},
   // {path:'memberlogin', component:ClientLoginComponent},
-  {path:'clientside/dashboard', component:CurrentUserDashboardComponent},
-  {path:'', component:ClientLoginComponent},
+  {path:'clientside/dashboard', component:CurrentUserDashboardComponent,canActivate:[AuthGuard]},
+  {path:'', component:ClientLoginComponent,canActivate:[AuthGuard]},
 
  
 
@@ -32,9 +32,9 @@ const routes: Routes = [
   
   {path:'settings', component:SettingsComponent,canActivate:[AuthGuard]},
 
-  {path:'clientside/edit', component:EditClientComponent},//,canActivate:[AuthGuard]
-  {path:'client/:id', component:ClientDetailsComponent},//,canActivate:[AuthGuard]
-  {path:'**', component:NotfoundComponent},
+  {path:'clientside/edit', component:EditClientComponent,canActivate:[AuthGuard]},//,canActivate:[AuthGuard]
+  {path:'client/:id', component:ClientDetailsComponent,canActivate:[AuthGuard]},//,canActivate:[AuthGuard]
+  {path:'**', component:NotfoundComponent,canActivate:[AuthGuard]},
 
 
 

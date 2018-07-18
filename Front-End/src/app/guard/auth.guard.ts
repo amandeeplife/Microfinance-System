@@ -11,6 +11,7 @@ constructor(
 ){}
 canActivate(){
      {
+         console.log(this.authService.getToken()+"my tokendd")
         if(this.authService.getToken()==undefined){
             this.router.navigate(['/login'])
             return false;

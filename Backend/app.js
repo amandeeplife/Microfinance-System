@@ -4,13 +4,14 @@ const route= require('./routing/route')
 const user= require('./Model/user')
 const bodyParser = require('body-parser')
 var morgan = require('morgan');
+var cors = require('cors')
 
 
 
 const app= express();
 
-var port = 9898
-
+var port = 5100
+app.use(cors())
 app.use(express.json())
 app.use(morgan('combined'))
 app.use(express.urlencoded({extended:true}))
